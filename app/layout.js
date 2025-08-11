@@ -4,9 +4,9 @@ import './globals.css'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata = {
-  title: 'QuickCourt - Premium Sports Facility Booking Platform',
-  description: 'Book premium sports facilities instantly. Find courts, fields, and venues for badminton, tennis, football, basketball and more. Trusted by millions of players worldwide.',
-  keywords: 'sports booking, court booking, facility booking, badminton, tennis, football, basketball, sports venues',
+  title: 'QuickCourt - AI-Powered Sports Facility Booking Platform',
+  description: 'Join 2.5M+ players using AI-powered recommendations to book premium sports facilities across 847+ cities in India. Trusted by millions worldwide.',
+  keywords: 'AI sports booking, smart court booking, facility booking, badminton, tennis, football, basketball, sports venues, artificial intelligence',
   authors: [{ name: 'QuickCourt Team' }],
   creator: 'QuickCourt',
   publisher: 'QuickCourt',
@@ -15,21 +15,21 @@ export const metadata = {
     address: false,
     telephone: false,
   },
-  metadataBase: new URL('https://quickcourt.com'),
+  metadataBase: new URL('https://quickcourt.ai'),
   alternates: {
     canonical: '/',
   },
   openGraph: {
-    title: 'QuickCourt - Premium Sports Facility Booking Platform',
-    description: 'Book premium sports facilities instantly. Trusted by millions of players worldwide.',
-    url: 'https://quickcourt.com',
+    title: 'QuickCourt - AI-Powered Sports Facility Booking Platform',
+    description: 'Join 2.5M+ players using AI-powered recommendations. Book premium sports facilities instantly.',
+    url: 'https://quickcourt.ai',
     siteName: 'QuickCourt',
     images: [
       {
         url: '/og-image.jpg',
         width: 1200,
         height: 630,
-        alt: 'QuickCourt - Sports Facility Booking',
+        alt: 'QuickCourt - AI-Powered Sports Facility Booking',
       },
     ],
     locale: 'en_US',
@@ -37,8 +37,8 @@ export const metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'QuickCourt - Premium Sports Facility Booking Platform',
-    description: 'Book premium sports facilities instantly. Trusted by millions of players worldwide.',
+    title: 'QuickCourt - AI-Powered Sports Facility Booking Platform',
+    description: 'Join 2.5M+ players using AI-powered recommendations. Book premium sports facilities instantly.',
     images: ['/og-image.jpg'],
     creator: '@quickcourt',
   },
@@ -66,8 +66,10 @@ export default function RootLayout({ children }) {
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
         <meta name="theme-color" content="#3b82f6" />
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
       </head>
-      <body className={`${inter.className} antialiased`}>
+      <body className={`${inter.className} antialiased bg-gray-50`}>
         <div id="root">{children}</div>
       </body>
     </html>

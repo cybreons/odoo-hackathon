@@ -2,20 +2,47 @@
 
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Users, Building2, Shield, Star, MapPin, Clock, TrendingUp, CheckCircle, ArrowRight, Play, Zap, Globe, Award, Heart, Calendar } from 'lucide-react'
+import { Users, Building2, Shield, Star, MapPin, Clock, TrendingUp, CheckCircle, ArrowRight, Play, Zap, Globe, Award, Heart, Calendar, Activity, Sparkles, Target, Rocket } from 'lucide-react'
 import Link from 'next/link'
 import Image from 'next/image'
-import Logo from '@/components/ui/Logo'
-import RoleCard from '@/components/ui/RoleCard'
-import StatCard from '@/components/ui/StatCard'
+import EnhancedLogo from '@/components/ui/EnhancedLogo'
+import EnhancedRoleCard from '@/components/ui/EnhancedRoleCard'
+import MetricsCard from '@/components/ui/MetricsCard'
 import TestimonialCard from '@/components/ui/TestimonialCard'
 import FacilityCard from '@/components/ui/FacilityCard'
+import { massiveAnalytics, generateRealTimeMetrics } from '@/data/massiveMockData'
 
-const stats = [
-  { label: 'Active Users', value: '2.5M+', icon: Users, color: 'from-blue-500 to-blue-600' },
-  { label: 'Sports Facilities', value: '15K+', icon: Building2, color: 'from-green-500 to-green-600' },
-  { label: 'Cities Covered', value: '500+', icon: Globe, color: 'from-purple-500 to-purple-600' },
-  { label: 'Bookings Made', value: '50M+', icon: Calendar, color: 'from-orange-500 to-orange-600' },
+const enhancedStats = [
+  { 
+    label: 'Active Users', 
+    value: '2.5M+', 
+    icon: Users, 
+    color: 'from-blue-500 to-blue-600',
+    trend: { isUp: true, value: 23.5 },
+    isLive: true
+  },
+  { 
+    label: 'Sports Facilities', 
+    value: '45K+', 
+    icon: Building2, 
+    color: 'from-green-500 to-green-600',
+    trend: { isUp: true, value: 18.7 }
+  },
+  { 
+    label: 'Cities Covered', 
+    value: '847+', 
+    icon: Globe, 
+    color: 'from-purple-500 to-purple-600',
+    trend: { isUp: true, value: 12.3 }
+  },
+  { 
+    label: 'Total Bookings', 
+    value: '12.4M+', 
+    icon: Calendar, 
+    color: 'from-orange-500 to-orange-600',
+    trend: { isUp: true, value: 31.2 },
+    isLive: true
+  },
 ]
 
 const features = [
@@ -108,36 +135,43 @@ const popularFacilities = [
 const roles = [
   {
     title: 'Sports Player',
-    description: 'Discover premium courts and facilities. Book instantly with flexible scheduling and competitive pricing.',
+    description: 'Join 2.5M+ players discovering premium courts and facilities. Book instantly with AI-powered recommendations and competitive pricing.',
     icon: Users,
     color: '59, 130, 246',
     path: '/auth/player',
-    features: ['Instant Booking', 'Best Price Guarantee', 'Flexible Cancellation', 'Community Features']
+    features: ['AI-Powered Recommendations', 'Instant Booking', 'Best Price Guarantee', 'Premium Support', 'Community Features'],
+    isPremium: false,
+    userCount: '2.5M+'
   },
   {
     title: 'Facility Owner',
-    description: 'List your venues and maximize revenue with our advanced management tools and marketing reach.',
+    description: 'Join 15K+ successful owners maximizing revenue with our advanced AI-driven management platform and nationwide marketing reach.',
     icon: Building2,
     color: '34, 197, 94',
     path: '/auth/owner',
-    features: ['Revenue Analytics', 'Automated Scheduling', 'Marketing Tools', 'Customer Management']
+    features: ['AI Revenue Optimization', 'Smart Scheduling', 'Advanced Analytics', 'Marketing Automation', 'Premium Support'],
+    isPremium: true,
+    userCount: '15K+'
   },
   {
     title: 'Administrator',
-    description: 'Manage the platform ecosystem with comprehensive tools for quality control and user experience.',
+    description: 'Access enterprise-grade platform management with comprehensive analytics, quality control, and advanced user experience tools.',
     icon: Shield,
     color: '249, 115, 22',
     path: '/auth/admin',
-    features: ['Platform Analytics', 'Quality Control', 'User Management', 'Revenue Insights']
+    features: ['Enterprise Analytics', 'Quality Control', 'User Management', 'Revenue Insights', 'System Monitoring'],
+    isPremium: true,
+    userCount: 'Enterprise'
   }
 ]
 
 export default function LandingPage() {
   const [showRoles, setShowRoles] = useState(false)
   const [currentTestimonial, setCurrentTestimonial] = useState(0)
+  const [realTimeMetrics, setRealTimeMetrics] = useState(generateRealTimeMetrics())
 
   useEffect(() => {
-    const timer = setTimeout(() => setShowRoles(true), 3000)
+    const timer = setTimeout(() => setShowRoles(true), 2500)
     return () => clearTimeout(timer)
   }, [])
 
@@ -148,8 +182,46 @@ export default function LandingPage() {
     return () => clearInterval(interval)
   }, [])
 
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setRealTimeMetrics(generateRealTimeMetrics())
+    }, 5000)
+    return () => clearInterval(interval)
+  }, [])
+
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900">
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 relative overflow-hidden">
+      {/* Enhanced background effects */}
+      <div className="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="none" fill-rule="evenodd"%3E%3Cg fill="%239C92AC" fill-opacity="0.03"%3E%3Ccircle cx="30" cy="30" r="2"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')] opacity-30" />
+      
+      {/* Animated gradient orbs */}
+      <motion.div
+        className="absolute top-1/4 left-1/4 w-96 h-96 bg-gradient-to-r from-blue-500/20 to-purple-500/20 rounded-full blur-3xl"
+        animate={{
+          x: [0, 100, 0],
+          y: [0, -50, 0],
+          scale: [1, 1.2, 1]
+        }}
+        transition={{
+          duration: 20,
+          repeat: Infinity,
+          ease: "easeInOut"
+        }}
+      />
+      <motion.div
+        className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-gradient-to-r from-green-500/20 to-blue-500/20 rounded-full blur-3xl"
+        animate={{
+          x: [0, -100, 0],
+          y: [0, 50, 0],
+          scale: [1.2, 1, 1.2]
+        }}
+        transition={{
+          duration: 25,
+          repeat: Infinity,
+          ease: "easeInOut"
+        }}
+      />
+
       <AnimatePresence mode="wait">
         {!showRoles ? (
           <motion.div
@@ -160,7 +232,7 @@ export default function LandingPage() {
             transition={{ duration: 0.8 }}
             className="flex flex-col items-center justify-center min-h-screen px-6"
           >
-            <Logo size="xl" animate={true} />
+            <EnhancedLogo size="xl" animate={true} />
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
@@ -168,7 +240,7 @@ export default function LandingPage() {
               className="text-center mt-8"
             >
               <h1 className="text-2xl md:text-3xl text-white/90 font-light mb-4">
-                India's Premier Sports Booking Platform
+                India's #1 AI-Powered Sports Booking Platform
               </h1>
               <div className="flex items-center justify-center space-x-8 text-white/60">
                 <div className="flex items-center space-x-2">
@@ -180,8 +252,8 @@ export default function LandingPage() {
                   <span>15K+ Venues</span>
                 </div>
                 <div className="flex items-center space-x-2">
-                  <Globe size={20} />
-                  <span>500+ Cities</span>
+                  <Activity size={20} />
+                  <span className="text-green-400 font-semibold">{realTimeMetrics.activeUsers.toLocaleString()} Online</span>
                 </div>
               </div>
             </motion.div>
@@ -195,10 +267,8 @@ export default function LandingPage() {
             className="min-h-screen"
           >
             {/* Hero Section */}
-            <section className="relative min-h-screen flex items-center justify-center px-6 overflow-hidden">
+            <section className="relative min-h-screen flex items-center justify-center px-6">
               {/* Background Elements */}
-              <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900" />
-              <div className="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="none" fill-rule="evenodd"%3E%3Cg fill="%239C92AC" fill-opacity="0.05"%3E%3Ccircle cx="30" cy="30" r="2"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')] opacity-20" />
               
               <div className="relative z-10 max-w-7xl mx-auto text-center">
                 <motion.div
@@ -207,13 +277,17 @@ export default function LandingPage() {
                   transition={{ duration: 0.8 }}
                   className="mb-12"
                 >
-                  <Logo size="lg" />
+                  <EnhancedLogo size="lg" />
                   <h1 className="text-5xl md:text-7xl font-bold text-white mt-8 mb-6 leading-tight">
-                    Book Sports Venues
-                    <span className="block gradient-text">Instantly</span>
+                    AI-Powered Sports
+                    <span className="block gradient-text flex items-center justify-center">
+                      <Sparkles className="mr-4" size={60} />
+                      Booking
+                      <Rocket className="ml-4" size={60} />
+                    </span>
                   </h1>
                   <p className="text-xl md:text-2xl text-white/80 max-w-3xl mx-auto mb-12 leading-relaxed">
-                    Join millions of players who trust QuickCourt for premium sports facility bookings across India
+                    Join 2.5M+ players using AI-powered recommendations to discover and book premium sports facilities across 847+ cities in India
                   </p>
                 </motion.div>
 
@@ -224,14 +298,27 @@ export default function LandingPage() {
                   transition={{ duration: 0.8, delay: 0.3 }}
                   className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-16"
                 >
-                  {stats.map((stat, index) => (
-                    <div key={index} className="text-center">
+                  {enhancedStats.map((stat, index) => (
+                    <motion.div key={index} className="text-center" whileHover={{ scale: 1.05 }}>
                       <div className={`inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-r ${stat.color} mb-4`}>
                         <stat.icon size={28} className="text-white" />
+                        {stat.isLive && (
+                          <motion.div
+                            className="absolute -top-1 -right-1 w-3 h-3 bg-green-400 rounded-full"
+                            animate={{ scale: [1, 1.2, 1], opacity: [1, 0.7, 1] }}
+                            transition={{ duration: 1.5, repeat: Infinity }}
+                          />
+                        )}
                       </div>
                       <div className="text-3xl md:text-4xl font-bold text-white mb-2">{stat.value}</div>
                       <div className="text-white/60">{stat.label}</div>
-                    </div>
+                      {stat.trend && (
+                        <div className={`text-sm mt-1 ${stat.trend.isUp ? 'text-green-400' : 'text-red-400'}`}>
+                          <TrendingUp size={14} className="inline mr-1" />
+                          +{stat.trend.value}%
+                        </div>
+                      )}
+                    </motion.div>
                   ))}
                 </motion.div>
 
@@ -241,14 +328,17 @@ export default function LandingPage() {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.8, delay: 0.6 }}
                 >
-                  <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">Choose Your Journey</h2>
+                  <h2 className="text-3xl md:text-4xl font-bold text-white mb-4 flex items-center justify-center">
+                    <Target className="mr-3" size={40} />
+                    Choose Your Journey
+                  </h2>
                   <p className="text-xl text-white/70 mb-12 max-w-2xl mx-auto">
-                    Select your role to access personalized features and start your sports journey
+                    Select your role to access AI-powered personalized features and start your premium sports journey
                   </p>
                   
                   <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
                     {roles.map((role, index) => (
-                      <RoleCard
+                      <EnhancedRoleCard
                         key={role.title}
                         {...role}
                         delay={0.8 + index * 0.1}
@@ -270,10 +360,10 @@ export default function LandingPage() {
                   className="text-center mb-16"
                 >
                   <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-                    Why Choose QuickCourt?
+                    Why 2.5M+ Players Choose QuickCourt?
                   </h2>
                   <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-                    Experience the future of sports facility booking with our cutting-edge platform
+                    Experience the future of sports facility booking with our AI-powered platform and enterprise-grade features
                   </p>
                 </motion.div>
 
